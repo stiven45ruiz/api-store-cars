@@ -1,9 +1,19 @@
-const express = require('express');
+const express = require("express");
+const { festApi } = require('./public/fests/index')
+const { carsApi } = require('./public/products/index')
+
 const app = express();
-const port = 3000;
+app.use(express.json());
+const port = 3090;
 
-app.get('/')
-
+festApi(app);
+carsApi(app);
 app.listen(port, ()=>{
-  console.log('Escuchando por el puerto: ', port)
+  console.log(`my port is ${port}`)
 })
+
+
+
+
+
+
