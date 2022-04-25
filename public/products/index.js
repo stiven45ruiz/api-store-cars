@@ -8,7 +8,7 @@ module.exports.carsApi = (app)=> {
     .get('/products', ProductsController.getAllProducts)
     .get('/products/:id', ProductsController.getProduct)
     .post('/product', ProductsController.createProduct)
-    .patch('/products/:id', ProductsController.updateProduct)
+    .put('/products/:id', ProductsController.updateProduct)
     .delete('/products/:id', ProductsController.deleteProduct)
 
   app.use('/api/cars', router)

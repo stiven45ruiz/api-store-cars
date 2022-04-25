@@ -50,8 +50,17 @@ module.exports.ProductsController = {
 
     try {
       pool.query(
-        `INSERT INTO carsclub.products (id, image, title, price, description, typeCar, createdAt, updatedAt)
-        VALUES ('${product.id}', '${product.image}','${product.title}', '${product.price}', '${product.description}', '${product.typeCar}', '${fecha}', '${fecha}')`,
+        `INSERT INTO carsclub.products
+        (id, image, title, price, description, typeCar, createdAt, updatedAt)
+        VALUES (
+          '${product.id}',
+          '${product.image}',
+          '${product.title}',
+          '${product.price}',
+          '${product.description}',
+          '${product.typeCar}',
+          '${fecha}',
+          '${fecha}')`,
         (error, result)=>{
           if(error){
             console.log(error)
@@ -66,18 +75,26 @@ module.exports.ProductsController = {
     }
   },
   updateProduct:(req, res)=>{
-    const id = req.body.id;
+    const product = req.body;
+    const {id} = req.params;
+
     try {
       pool.query(
-        `UPDATE carsclub.products SET ?
-        WHERE id = ?`, [req.body, id]
+        `UPDATE carsclub.products
+        SET
+          image = '${product.image}',
+          title = '${product.title}',
+          price = '${product.price}',
+          description = '${product.description}',
+          typeCar = '${product.typeCar}',
+          updatedAt = '${fecha}'
+        WHERE id = '${id}'`
       ,(error, result)=>{
         if(error){
           console.log(error)
         }
         res.status(200).send(
-          'User updated successfully.',
-          result
+            result
         );
       })
 
