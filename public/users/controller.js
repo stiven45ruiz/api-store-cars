@@ -90,7 +90,7 @@ module.exports.UsersController = {
     pool.query(
       `SELECT * FROM carsclub.users WHERE email = '${user.email}'`
       ,(error, result)=>{
-        if(!!result[0]) return res.status(401).send("The email exists");
+        if(result[0]) return res.status(401).send("The email exists");
       }
     )
   }

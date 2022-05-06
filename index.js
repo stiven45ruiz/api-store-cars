@@ -4,7 +4,7 @@ const { carsApi } = require('./public/products/index');
 const {usersApi} = require('./public/users/index')
 const cors = require("cors");
 const bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken');
+
 
 const app = express();
 app.use(express.json());
