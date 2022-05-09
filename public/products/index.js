@@ -6,7 +6,7 @@ const router = express.Router();
 module.exports.carsApi = (app)=> {
   router
     .get('/products',ProductsController.getAllProducts)
-    .get('/products/:id', verifyToken, ProductsController.getProduct)
+    .get('/products/:id', ProductsController.getProduct)
     .post('/product', ProductsController.createProduct)
     .put('/products/:id', ProductsController.updateProduct)
     .delete('/products/:id', ProductsController.deleteProduct)

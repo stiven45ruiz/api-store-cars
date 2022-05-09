@@ -85,13 +85,18 @@ module.exports.UsersController = {
     }
 
   },
-  auth:(req, res)=>{
-    const user = req.body;
-    pool.query(
-      `SELECT * FROM carsclub.users WHERE email = '${user.email}'`
-      ,(error, result)=>{
+  auth:(req, res, next)=>{
+    try {
+      const user = req.body;
+      pool.query(
+        `SELECT * FROM carsclub.users WHERE email = '${user.email}'`
+        ,(error, result)=>{
         if(result[0]) return res.status(401).send("The email exists");
+        next()
       }
     )
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

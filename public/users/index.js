@@ -5,7 +5,7 @@ const router = express.Router();
 
 module.exports.usersApi = (app)=> {
   router
-    .post('/user', UsersController.auth,UsersController.newUser)
+    .post('/signup', UsersController.auth,UsersController.newUser)
     .post('/login', UsersController.login)
     // .get('/users', ProductsController.getAllProducts)
     // .get('/user/:id', ProductsController.getProduct)
