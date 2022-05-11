@@ -53,7 +53,7 @@ module.exports.UsersController = {
     try {
       const token = jwt.sign(user.password, 'TNK');
       pool.query(
-      `SELECT * FROM carsclub.users WHERE email = '${user.email}'`
+      `SELECT * FROM carsclub.users WHERE email = '${user.email}, name = '${user.email}'`
       ,(error, result)=>{
 
         const userDB = result[0];
@@ -63,6 +63,7 @@ module.exports.UsersController = {
         if (userDB.email===user.email && userDB.password === token) {
           res.status(200).send({
             signed_user: user.email,
+            name: user.name,
             token: token
           });
         } else {
