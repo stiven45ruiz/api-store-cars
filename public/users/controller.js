@@ -18,10 +18,11 @@ module.exports.UsersController = {
 
 
   newUser:(req, res)=>{
+
     const user = req.body;
 
     try {
-      const token = jwt.sign(user.password, 'TNK')
+      const token = jwt.sign(user.password, TKN.CLAVE)
       pool.query(
         `INSERT INTO carsclub.users
         (name, email, password, role, createdAt, updatedAt)
@@ -32,7 +33,7 @@ module.exports.UsersController = {
           'user',
           '${fecha}',
           '${fecha}')`,
-        (error, result)=>{
+        (error)=>{
 
           if(error){
             console.log(error)
@@ -49,9 +50,10 @@ module.exports.UsersController = {
 
 
   login:(req, res)=>{
+
     const user = req.body;
     try {
-      const token = jwt.sign(user.password, 'TNK');
+      const token = jwt.sign(user.password, TKN.CLAVE);
       pool.query(
       `SELECT * FROM carsclub.users WHERE email = '${user.email}'`
       ,(error, result)=>{
@@ -61,6 +63,7 @@ module.exports.UsersController = {
         if(userDB.password !== token) return res.status(401).send("Wrong Password");
 
         if (userDB.email===user.email && userDB.password === token) {
+          console.log('User log')
           res.status(200).json({
             signed_user: user.email,
             name: userDB.name,
