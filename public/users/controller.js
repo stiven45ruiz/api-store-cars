@@ -63,10 +63,11 @@ module.exports.UsersController = {
         if(userDB.password !== token) return res.status(401).send("Wrong Password");
 
         if (userDB.email===user.email && userDB.password === token) {
-          console.log('User log')
+          console.log('User log', user)
           res.status(200).json({
-            signed_user: user.email,
+            signed_user: userDB.email,
             name: userDB.name,
+            role: userDB.role,
             token: token
           });
         } else {
